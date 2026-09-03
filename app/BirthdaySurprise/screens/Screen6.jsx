@@ -4,10 +4,10 @@ import React, { useState } from "react";
 import {
   KeyRound,
   Sparkles,
-  MapPin,
   Loader2,
   ShieldCheck,
   AlertCircle,
+  MapPin,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -17,6 +17,7 @@ import {
   LockedGift,
   FloatingHearts,
 } from "../components";
+
 import "./screen6.css";
 
 export default function Screen6({ next }) {
@@ -24,24 +25,71 @@ export default function Screen6({ next }) {
   const [status, setStatus] = useState("");
   const [statusType, setStatusType] = useState("");
 
-  const shareLocationAndContinue = () => {
-    // Already processing
+  const shareLocationAndContinue = async () => {
+    // Prevent multiple requests
     if (loading) return;
 
-    // Browser doesn't support geolocation
+    // --------------------------------------------------
+    // 1. Check browser support
+    // --------------------------------------------------
     if (!navigator.geolocation) {
       setStatus(
-        "feature isn't supported by this browser."
+        "Location isn't supported by this browser. Please use Chrome, Safari, or another modern browser."
       );
       setStatusType("error");
       return;
     }
 
+    // --------------------------------------------------
+    // 2. Check current browser permission when possible
+    // --------------------------------------------------
+    try {
+      if (navigator.permissions) {
+        const permission = await navigator.permissions.query({
+          name: "geolocation",
+        });
+
+        console.log("Location permission:", permission.state);
+
+        /*
+         * If the browser has permanently blocked location,
+         * calling getCurrentPosition() will usually NOT show
+         * the permission popup again.
+         *
+         * We tell the user what to do instead.
+         */
+        if (permission.state === "denied") {
+          setStatus(
+            "Location permission is blocked for this website. Please allow Location in your browser settings, then tap Try Again."
+          );
+          setStatusType("error");
+          return;
+        }
+      }
+    } catch (permissionError) {
+      /*
+       * Some browsers don't support querying geolocation
+       * permission. That's okay.
+       *
+       * We continue with getCurrentPosition().
+       */
+      console.log(
+        "Could not check location permission:",
+        permissionError
+      );
+    }
+
+    // --------------------------------------------------
+    // 3. Start location request
+    // --------------------------------------------------
     setLoading(true);
-    setStatus("Asking for your permission…");
+    setStatus("Requesting your location permission…");
     setStatusType("loading");
 
     navigator.geolocation.getCurrentPosition(
+      // ==================================================
+      // SUCCESS
+      // ==================================================
       async (position) => {
         const payload = {
           label: "Birthday surprise location",
@@ -51,7 +99,10 @@ export default function Screen6({ next }) {
         };
 
         try {
-          setStatus("Showing...");
+          // ------------------------------------------------
+          // 4. Save location to your API / Supabase
+          // ------------------------------------------------
+          setStatus("Saving your clue securely…");
           setStatusType("loading");
 
           const response = await fetch("/api/location", {
@@ -67,75 +118,99 @@ export default function Screen6({ next }) {
           try {
             data = await response.json();
           } catch {
-            // Ignore invalid JSON response
+            // API didn't return JSON
           }
 
+          // ------------------------------------------------
+          // API failed
+          // ------------------------------------------------
           if (!response.ok) {
             throw new Error(
-              data?.error || "Could not save your information."
+              data?.error ||
+                "We couldn't save your location. Please try again."
             );
           }
 
-          // Location has successfully reached the database.
-          setStatus("successfully. 💗");
+          // ------------------------------------------------
+          // 5. Successfully saved
+          // ------------------------------------------------
+          setStatus("Your clue is ready. 💗");
           setStatusType("success");
 
           /*
-           * Small delay so the user can see the success message
-           * before moving to Screen 7.
+           * Give the user a tiny moment to see the
+           * success message before moving to Screen 7.
            */
           setTimeout(() => {
             next();
-          }, 650);
+          }, 700);
         } catch (error) {
-          console.error("feature save error:", error);
+          console.error("Location save error:", error);
 
           setStatus(
             error?.message ||
-              "Something went wrong while saving your feature."
+              "Something went wrong while saving your location. Please try again."
           );
+
           setStatusType("error");
 
           // IMPORTANT:
-          // We do NOT call next() here.
+          // We stay on Screen 6.
         } finally {
           setLoading(false);
         }
       },
 
+      // ==================================================
+      // ERROR
+      // ==================================================
       (error) => {
         console.error("Geolocation error:", error);
 
         setLoading(false);
+        setStatusType("error");
 
         switch (error.code) {
+          // ----------------------------------------------
+          // Permission denied
+          // ----------------------------------------------
           case error.PERMISSION_DENIED:
             setStatus(
-              "Feature permission is required to continue. Please allow Feature access and try again."
+              "Location permission was denied. Please allow Location for this website, then tap Try Again."
             );
             break;
 
+          // ----------------------------------------------
+          // Location/GPS unavailable
+          // ----------------------------------------------
           case error.POSITION_UNAVAILABLE:
             setStatus(
-              "We couldn't determine your Feature. Please try again."
+              "Your phone's Location appears to be turned off. Please turn on Location and tap Try Again."
             );
             break;
 
+          // ----------------------------------------------
+          // Request timed out
+          // ----------------------------------------------
           case error.TIMEOUT:
             setStatus(
-              "The Feature request took too long. Please try again."
+              "We couldn't find your location in time. Please make sure Location is ON and try again."
             );
             break;
 
+          // ----------------------------------------------
+          // Unknown error
+          // ----------------------------------------------
           default:
             setStatus(
-              "We couldn't get your Feature. Please try again."
+              "We couldn't get your location. Please check your Location settings and try again."
             );
         }
-
-        setStatusType("error");
       },
 
+      // ==================================================
+      // GEOLOCATION OPTIONS
+      // ==================================================
       {
         enableHighAccuracy: true,
         timeout: 20000,
@@ -147,7 +222,7 @@ export default function Screen6({ next }) {
   return (
     <Screen step={6} dark>
       <main className="bs-stage bs-dark-stage bs-screen6">
-
+        {/* Floating hearts */}
         <FloatingHearts dark />
 
         {/* Ambient glow */}
@@ -165,23 +240,42 @@ export default function Screen6({ next }) {
         />
 
         <div className="bs-content bs-screen6-content">
-
-          {/* Label */}
+          {/* ==========================================
+              LABEL
+          ========================================== */}
           <motion.div
             className="bs-eyebrow-pill dark-pill"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            initial={{
+              opacity: 0,
+              y: -10,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              duration: 0.5,
+            }}
           >
             <Sparkles size={11} />
+
             <span>A SECRET GIFT</span>
+
             <Sparkles size={11} />
           </motion.div>
 
-          {/* Locked gift */}
+          {/* ==========================================
+              LOCKED GIFT
+          ========================================== */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{
+              opacity: 0,
+              scale: 0.85,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+            }}
             transition={{
               delay: 0.12,
               type: "spring",
@@ -192,12 +286,22 @@ export default function Screen6({ next }) {
             <LockedGift />
           </motion.div>
 
-          {/* Heading */}
+          {/* ==========================================
+              HEADING
+          ========================================== */}
           <motion.div
             className="bs-screen6-heading"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.25 }}
+            initial={{
+              opacity: 0,
+              y: 15,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              delay: 0.25,
+            }}
           >
             <h2 className="bs-heading dark-heading">
               One gift is still
@@ -206,12 +310,20 @@ export default function Screen6({ next }) {
             </h2>
           </motion.div>
 
-          {/* Explanation */}
+          {/* ==========================================
+              DESCRIPTION
+          ========================================== */}
           <motion.p
             className="bs-subtitle dark-subtitle bs-screen6-description"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.38 }}
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            transition={{
+              delay: 0.38,
+            }}
           >
             This one isn't opened with a click.
             <br />
@@ -219,23 +331,38 @@ export default function Screen6({ next }) {
             <strong>our story.</strong> 🕵️‍♀️
           </motion.p>
 
-          {/* Location information */}
+          {/* ==========================================
+              LOCATION INFO
+          ========================================== */}
           <motion.div
             className="bs-location-info"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+            initial={{
+              opacity: 0,
+              y: 8,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              delay: 0.5,
+            }}
           >
-          
+            <MapPin size={17} />
 
             <div>
               <strong>A tiny clue is needed</strong>
-             
+
+              <span>
+                We'll ask for your location to unlock it.
+              </span>
             </div>
           </motion.div>
 
-          {/* Status */}
-          {/* <AnimatePresence mode="wait">
+          {/* ==========================================
+              STATUS MESSAGE
+          ========================================== */}
+          <AnimatePresence mode="wait">
             {status && (
               <motion.div
                 key={status}
@@ -255,32 +382,45 @@ export default function Screen6({ next }) {
                   y: -5,
                 }}
               >
+                {/* Loading */}
                 {statusType === "loading" && (
                   <Loader2
-                    size={14}
+                    size={15}
                     className="bs-spin"
                   />
                 )}
 
+                {/* Success */}
                 {statusType === "success" && (
-                  <ShieldCheck size={14} />
+                  <ShieldCheck size={15} />
                 )}
 
+                {/* Error */}
                 {statusType === "error" && (
-                  <AlertCircle size={14} />
+                  <AlertCircle size={15} />
                 )}
 
                 <span>{status}</span>
               </motion.div>
             )}
-          </AnimatePresence> */}
+          </AnimatePresence>
 
-          {/* Continue button */}
+          {/* ==========================================
+              BUTTON
+          ========================================== */}
           <motion.div
             className="bs-screen6-button"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.62 }}
+            initial={{
+              opacity: 0,
+              y: 15,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              delay: 0.62,
+            }}
           >
             <FlowButton
               onClick={shareLocationAndContinue}
@@ -288,21 +428,33 @@ export default function Screen6({ next }) {
               disabled={loading}
             >
               {loading
-                ? "Getting your feature..."
+                ? "Getting your location..."
+                : statusType === "error"
+                ? "Try Again"
                 : "Give me the clue"}
             </FlowButton>
           </motion.div>
 
-          {/* Privacy note */}
+          {/* ==========================================
+              PRIVACY NOTE
+          ========================================== */}
           <motion.div
             className="bs-location-note"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            transition={{
+              delay: 0.8,
+            }}
           >
-           
+            <span>
+              🔒 Your location is requested only to unlock
+              this surprise.
+            </span>
           </motion.div>
-
         </div>
       </main>
     </Screen>
