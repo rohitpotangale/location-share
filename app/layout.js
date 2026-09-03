@@ -2,8 +2,8 @@ import "./globals.css";
 import { Playfair_Display, Inter } from "next/font/google";
 
 export const metadata = {
-  title: "Share Location",
-  description: "Explicit location sharing",
+  title: "Mahhi Birthday",
+  description: "Mahhi Birthday",
 };
 
 const playfair = Playfair_Display({

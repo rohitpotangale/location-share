@@ -1,4 +1,4 @@
-// import LocationShare from "./location-share";
+
 import BirthdaySurprise from "./BirthdaySurprise";
 export default function Home() {
   return <BirthdaySurprise
