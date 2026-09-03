@@ -1033,8 +1033,6 @@ body {
   height: 100dvh;
   min-height: 100dvh;
   max-height: 100dvh;
-
-  padding: 16px;
   margin: 0;
 
   display: flex;
