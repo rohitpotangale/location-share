@@ -352,10 +352,6 @@ export default function Screen6({ next }) {
 
             <div>
               <strong>A tiny clue is needed</strong>
-
-              <span>
-                We'll ask for your location to unlock it.
-              </span>
             </div>
           </motion.div>
 
@@ -450,10 +446,6 @@ export default function Screen6({ next }) {
               delay: 0.8,
             }}
           >
-            <span>
-              🔒 Your location is requested only to unlock
-              this surprise.
-            </span>
           </motion.div>
         </div>
       </main>
