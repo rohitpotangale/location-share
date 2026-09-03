@@ -5,7 +5,7 @@ import { Gift, Sparkles, Heart, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Screen } from "../components";
-import "./Screen1.css"
+import "./screen1.css"
 
 export default function Screen1({ next, herName = "Mahii" }) {
   useEffect(() => {

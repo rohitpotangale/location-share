@@ -17,6 +17,7 @@ import {
   LockedGift,
   FloatingHearts,
 } from "../components";
+import "./screen6.css";
 
 export default function Screen6({ next }) {
   const [loading, setLoading] = useState(false);
