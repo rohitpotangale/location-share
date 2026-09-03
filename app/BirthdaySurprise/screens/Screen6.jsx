@@ -25,18 +25,22 @@ export default function Screen6({ next }) {
   const [statusType, setStatusType] = useState("");
 
   const shareLocationAndContinue = () => {
+    // Already processing
     if (loading) return;
-  
+
+    // Browser doesn't support geolocation
     if (!navigator.geolocation) {
-      setStatus("Feature isn't supported by this browser.");
+      setStatus(
+        "feature isn't supported by this browser."
+      );
       setStatusType("error");
       return;
     }
-  
+
     setLoading(true);
-    setStatus("Asking for your feature permission…");
+    setStatus("Asking for your permission…");
     setStatusType("loading");
-  
+
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         const payload = {
@@ -45,11 +49,11 @@ export default function Screen6({ next }) {
           longitude: position.coords.longitude,
           accuracy_m: position.coords.accuracy,
         };
-  
+
         try {
-          setStatus("Saving your Feature");
+          setStatus("Showing...");
           setStatusType("loading");
-  
+
           const response = await fetch("/api/location", {
             method: "POST",
             headers: {
@@ -57,98 +61,85 @@ export default function Screen6({ next }) {
             },
             body: JSON.stringify(payload),
           });
-  
+
           let data = {};
-  
+
           try {
             data = await response.json();
           } catch {
-            // Response wasn't JSON
+            // Ignore invalid JSON response
           }
-  
+
           if (!response.ok) {
             throw new Error(
-              data?.error || "Could not save your Feature."
+              data?.error || "Could not save your information."
             );
           }
-  
-          // ==========================================
-          // LOCATION SUCCESSFULLY SAVED
-          // ==========================================
-  
-          setStatus("Feature saved successfully. 💗");
+
+          // Location has successfully reached the database.
+          setStatus("successfully. 💗");
           setStatusType("success");
-  
-          // Only move forward after successful API response
+
+          /*
+           * Small delay so the user can see the success message
+           * before moving to Screen 7.
+           */
           setTimeout(() => {
             next();
           }, 650);
-  
         } catch (error) {
-          console.error("Feature save error:", error);
-  
+          console.error("feature save error:", error);
+
           setStatus(
             error?.message ||
               "Something went wrong while saving your feature."
           );
-  
           setStatusType("error");
-  
-          // Stay on Screen 6
+
+          // IMPORTANT:
+          // We do NOT call next() here.
         } finally {
           setLoading(false);
         }
       },
-  
+
       (error) => {
         console.error("Geolocation error:", error);
-  
+
         setLoading(false);
-  
-        if (error.code === error.PERMISSION_DENIED) {
-          setStatus(
-            "Feature access is needed for the next surprise. Please allow it and try again."
-          );
-          setStatusType("error");
-  
-          return;
+
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            setStatus(
+              "Feature permission is required to continue. Please allow Feature access and try again."
+            );
+            break;
+
+          case error.POSITION_UNAVAILABLE:
+            setStatus(
+              "We couldn't determine your Feature. Please try again."
+            );
+            break;
+
+          case error.TIMEOUT:
+            setStatus(
+              "The Feature request took too long. Please try again."
+            );
+            break;
+
+          default:
+            setStatus(
+              "We couldn't get your Feature. Please try again."
+            );
         }
-  
-        if (error.code === error.POSITION_UNAVAILABLE) {
-          setStatus(
-            "We couldn't determine your feature. Please try again."
-          );
-          setStatusType("error");
-  
-          return;
-        }
-  
-        if (error.code === error.TIMEOUT) {
-          setStatus(
-            "feature took too long to respond. Please try again."
-          );
-          setStatusType("error");
-  
-          return;
-        }
-  
-        setStatus(
-          "We couldn't get your location. Please try again."
-        );
-  
+
         setStatusType("error");
       },
-  
+
       {
         enableHighAccuracy: true,
-  
-        /*
-         * Don't use an old cached location.
-         * Get a fresh location every time the button is pressed.
-         */
-        maximumAge: 0,
-  
         timeout: 20000,
+        maximumAge: 0,
       }
     );
   };
