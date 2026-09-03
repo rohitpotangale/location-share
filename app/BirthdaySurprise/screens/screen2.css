@@ -1,0 +1,350 @@
+/* =========================================================
+   SCREEN 2 — ROMANTIC BIRTHDAY COUNTDOWN
+   ========================================================= */
+
+   .bs-screen2-stage {
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+      radial-gradient(
+        circle at 50% 38%,
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(255, 242, 246, 0.85) 32%,
+        rgba(252, 220, 229, 0.95) 72%,
+        rgba(248, 205, 218, 1) 100%
+      );
+  }
+  
+  /* Soft ambient glows */
+  
+  .bs-screen2-glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(45px);
+  }
+  
+  .bs-screen2-glow-a {
+    width: 260px;
+    height: 260px;
+    top: 2%;
+    left: -100px;
+    background: rgba(255, 150, 180, 0.25);
+  }
+  
+  .bs-screen2-glow-b {
+    width: 240px;
+    height: 240px;
+    right: -100px;
+    bottom: 10%;
+    background: rgba(255, 174, 201, 0.28);
+  }
+  
+  /* Floating decorations */
+  
+  .bs-screen2-star {
+    position: absolute;
+    z-index: 2;
+    color: #ef8da6;
+    pointer-events: none;
+    font-size: 23px;
+    text-shadow: 0 4px 12px rgba(222, 87, 119, 0.2);
+  }
+  
+  .bs-screen2-star-1 {
+    top: 12%;
+    left: 12%;
+  }
+  
+  .bs-screen2-star-2 {
+    top: 31%;
+    right: 11%;
+    font-size: 17px;
+  }
+  
+  .bs-screen2-heart {
+    position: absolute;
+    z-index: 2;
+    top: 17%;
+    right: 14%;
+    color: rgba(238, 104, 137, 0.45);
+    font-size: 25px;
+    pointer-events: none;
+  }
+  
+  /* Content */
+  
+  .bs-screen2-content {
+    position: relative;
+    z-index: 5;
+    width: min(430px, 100%);
+    max-height: calc(100dvh - 20px);
+    justify-content: flex-start;
+    padding-top: 4px;
+  }
+  
+  /* Top pill */
+  
+  .bs-screen2-pill {
+    margin-bottom: 7px;
+    background: rgba(255, 255, 255, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    box-shadow:
+      0 8px 25px rgba(211, 91, 119, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+  
+  /* Heading */
+  
+  .bs-screen2-heading-wrap {
+    text-align: center;
+  }
+  
+  .bs-screen2-title {
+    margin: 0;
+    color: #3d2630;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(38px, 10vw, 50px);
+    line-height: 0.95;
+    font-weight: 500;
+    letter-spacing: -0.035em;
+  }
+  
+  .bs-screen2-title em {
+    color: #ed6687;
+    font-weight: 500;
+    font-style: italic;
+  }
+  
+  .bs-screen2-title span {
+    font-family: system-ui, sans-serif;
+    font-size: 31px;
+    vertical-align: 8px;
+  }
+  
+  .bs-screen2-subtitle {
+    margin: 10px 0 0;
+    color: #684d57;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  
+  /* Cake */
+  
+  .bs-screen2-cake {
+    position: relative;
+    width: 220px;
+    height: 160px;
+    margin: 1px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+  
+  .bs-screen2-cake-glow {
+    position: absolute;
+    width: 185px;
+    height: 130px;
+    left: 50%;
+    top: 17px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    filter: blur(20px);
+    z-index: -1;
+  }
+  
+  .bs-screen2-cake .bs-cake-svg {
+    width: 220px;
+    height: 150px;
+    margin: 0;
+  }
+  
+  /* Date */
+  
+  .bs-screen2-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+  
+    min-width: 205px;
+    height: 34px;
+    padding: 0 18px;
+    margin: -2px auto 9px;
+  
+    border-radius: 999px;
+  
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.95);
+  
+    color: #a8425e;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  
+    box-shadow:
+      0 7px 20px rgba(203, 79, 110, 0.11),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+  }
+  
+  .bs-screen2-date svg {
+    color: #ed6b89;
+  }
+  
+  /* Countdown card */
+  
+  .bs-screen2-countdown {
+    width: min(390px, calc(100vw - 70px));
+    min-height: 103px;
+    margin: 0 auto;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    padding: 9px 6px;
+  
+    border-radius: 25px;
+  
+    background: rgba(255, 255, 255, 0.64);
+    border: 1px solid rgba(255, 255, 255, 0.92);
+  
+    box-shadow:
+      0 12px 35px rgba(199, 76, 107, 0.11),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  
+  .bs-screen2-count-item {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .bs-count-heart {
+    margin-bottom: 1px;
+    color: #f29ab0;
+  }
+  
+  .bs-screen2-count-item strong {
+    color: #db5273;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(28px, 7vw, 38px);
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+  
+  .bs-screen2-count-item span {
+    margin-top: 5px;
+    color: #765864;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+  }
+  
+  .bs-count-divider {
+    width: 1px;
+    height: 51px;
+    background: rgba(231, 119, 146, 0.24);
+  }
+  
+  /* Bottom romantic message */
+  
+  .bs-screen2-bottom-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+  
+    width: 100%;
+    margin: 8px 0 7px;
+  }
+  
+  .bs-screen2-bottom-message p {
+    margin: 0;
+    color: #b33f5d;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+  
+  .bs-screen2-bottom-message span {
+    color: #ed7190;
+    font-size: 12px;
+  }
+  
+  /* Button */
+  
+  .bs-screen2-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .bs-screen2-button .bs-flow-btn {
+    width: min(330px, calc(100vw - 44px));
+  }
+  
+  /* Smaller phones */
+  
+  @media (max-height: 700px) {
+    .bs-screen2-pill {
+      transform: scale(0.9);
+      margin-bottom: 2px;
+    }
+  
+    .bs-screen2-title {
+      font-size: 35px;
+    }
+  
+    .bs-screen2-subtitle {
+      margin-top: 6px;
+      font-size: 10px;
+    }
+  
+    .bs-screen2-cake {
+      width: 185px;
+      height: 125px;
+      margin-top: -1px;
+    }
+  
+    .bs-screen2-cake .bs-cake-svg {
+      width: 190px;
+      height: 125px;
+    }
+  
+    .bs-screen2-date {
+      height: 30px;
+      margin-bottom: 6px;
+    }
+  
+    .bs-screen2-countdown {
+      min-height: 88px;
+    }
+  
+    .bs-screen2-count-item strong {
+      font-size: 27px;
+    }
+  
+    .bs-screen2-count-divider {
+      height: 42px;
+    }
+  
+    .bs-screen2-bottom-message {
+      margin: 5px 0;
+    }
+  }

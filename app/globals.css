@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  color: #17202a;
+}
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.card {
+  width: 100%;
+  max-width: 520px;
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+.card.wide {
+  max-width: 1000px;
+}
+.pin {
+  font-size: 42px;
+}
+h1 {
+  margin: 8px 0 12px;
+}
+p {
+  line-height: 1.55;
+  color: #53606d;
+}
+button {
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 16px;
+  cursor: pointer;
+  background: #111827;
+  color: white;
+}
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.status {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #eef2f7;
+}
+.error {
+  background: #fff0f0;
+}
+.result {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 12px;
+  background: #f5f8fb;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.result a,
+table a {
+  color: #1456c0;
+  font-weight: 600;
+}
+small {
+  display: block;
+  margin-top: 18px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+.login {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+input {
+  flex: 1;
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 16px;
+}
+.login button {
+  width: auto;
+}
+.tableWrap {
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+th,
+td {
+  text-align: left;
+  padding: 12px 10px;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
+@media (max-width: 600px) {
+  .card {
+    padding: 24px;
+  }
+  .login {
+    flex-direction: column;
+  }
+  .login button {
+    width: 100%;
+  }
+}

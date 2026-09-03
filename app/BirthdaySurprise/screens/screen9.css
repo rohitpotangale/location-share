@@ -1,0 +1,500 @@
+/* =========================================================
+   SCREEN 9 — FULL SCREEN PHOTO CELEBRATION
+   ========================================================= */
+
+   .bs-final-fullscreen {
+    position: relative;
+  
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+  
+    overflow: hidden;
+  
+    background: #180d12;
+  
+    isolation: isolate;
+  }
+  
+  
+  /* =========================================================
+     FULL SCREEN PHOTO
+     ========================================================= */
+  
+  .bs-final-background-photo {
+    position: absolute;
+  
+    inset: 0;
+  
+    width: 100%;
+    height: 100%;
+  
+    object-fit: cover;
+  
+    /*
+      For a portrait photo this keeps her face
+      toward the upper/center area.
+    */
+    object-position: center 24%;
+  
+    display: block;
+  
+    z-index: 0;
+  }
+  
+  
+  /* =========================================================
+     PHOTO OVERLAY
+     ========================================================= */
+  
+  .bs-final-photo-overlay {
+    position: absolute;
+  
+    inset: 0;
+  
+    z-index: 1;
+  
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(20, 8, 14, 0.10) 0%,
+        rgba(20, 8, 14, 0.04) 25%,
+        rgba(20, 8, 14, 0.22) 43%,
+        rgba(20, 8, 14, 0.72) 72%,
+        rgba(20, 8, 14, 0.94) 100%
+      );
+  }
+  
+  
+  /* =========================================================
+     PINK LIGHT
+     ========================================================= */
+  
+  .bs-final-pink-glow {
+    position: absolute;
+  
+    z-index: 2;
+  
+    width: 340px;
+    height: 340px;
+  
+    left: 50%;
+    top: 15%;
+  
+    transform: translateX(-50%);
+  
+    border-radius: 50%;
+  
+    background:
+      radial-gradient(
+        circle,
+        rgba(255, 135, 165, 0.22),
+        transparent 68%
+      );
+  
+    filter: blur(30px);
+  
+    pointer-events: none;
+  }
+  
+  
+  /* =========================================================
+     CONTENT
+     ========================================================= */
+  
+  .bs-final-overlay-content {
+    position: relative;
+  
+    z-index: 10;
+  
+    width: min(430px, calc(100% - 28px));
+  
+    height: 100%;
+  
+    margin: 0 auto;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  
+    box-sizing: border-box;
+  
+    padding:
+      18px
+      0
+      max(12px, env(safe-area-inset-bottom));
+  }
+  
+  
+  /* =========================================================
+     TOP LABEL
+     ========================================================= */
+  
+  .bs-final-top-label {
+    position: absolute;
+  
+    top: 17px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    gap: 8px;
+  
+    height: 31px;
+  
+    padding: 0 15px;
+  
+    border-radius: 999px;
+  
+    color: #ffe8ef;
+  
+    background:
+      rgba(72, 25, 39, 0.52);
+  
+    border:
+      1px solid rgba(255, 255, 255, 0.2);
+  
+    backdrop-filter: blur(12px);
+  
+    font-size: 8px;
+    font-weight: 700;
+  
+    letter-spacing: 0.1em;
+  
+    box-shadow:
+      0 8px 25px rgba(0, 0, 0, 0.18);
+  }
+  
+  
+  /* =========================================================
+     MESSAGE CARD
+     ========================================================= */
+  
+  .bs-final-message-card {
+    width: 100%;
+  
+    box-sizing: border-box;
+  
+    padding:
+      14px
+      17px
+      13px;
+  
+    border-radius: 25px;
+  
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 248, 250, 0.91),
+        rgba(255, 235, 241, 0.84)
+      );
+  
+    border:
+      1px solid rgba(255, 255, 255, 0.72);
+  
+    box-shadow:
+      0 20px 55px rgba(0, 0, 0, 0.34),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  
+    backdrop-filter: blur(13px);
+  
+    text-align: center;
+  }
+  
+  
+  /* =========================================================
+     HEART
+     ========================================================= */
+  
+  .bs-final-heart {
+    width: 30px;
+    height: 30px;
+  
+    margin: 0 auto 4px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    color: white;
+  
+    border-radius: 50%;
+  
+    background:
+      linear-gradient(
+        135deg,
+        #f47f9e,
+        #d94066
+      );
+  
+    box-shadow:
+      0 6px 16px rgba(207, 56, 92, 0.25);
+  }
+  
+  
+  /* =========================================================
+     TITLE
+     ========================================================= */
+  
+  .bs-final-title-new {
+    margin: 0;
+  
+    color: #452934;
+  
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+  
+    font-size: clamp(29px, 8vw, 39px);
+  
+    line-height: 0.95;
+  
+    font-weight: 500;
+  
+    letter-spacing: -0.025em;
+  }
+  
+  .bs-final-title-new em {
+    color: #df4e74;
+  
+    font-style: italic;
+  }
+  
+  
+  /* =========================================================
+     DIVIDER
+     ========================================================= */
+  
+  .bs-final-divider {
+    width: 170px;
+  
+    margin: 8px auto 7px;
+  
+    display: flex;
+  
+    align-items: center;
+  
+    gap: 7px;
+  
+    color: #e95b7e;
+  }
+  
+  .bs-final-divider span {
+    flex: 1;
+  
+    height: 1px;
+  
+    background:
+      linear-gradient(
+        to right,
+        transparent,
+        rgba(221, 72, 109, 0.4)
+      );
+  }
+  
+  .bs-final-divider span:last-child {
+    background:
+      linear-gradient(
+        to left,
+        transparent,
+        rgba(221, 72, 109, 0.4)
+      );
+  }
+  
+  
+  /* =========================================================
+     MESSAGE TEXT
+     ========================================================= */
+  
+  .bs-final-text-new {
+    color: #5f414b;
+  
+    font-size: 9.5px;
+  
+    line-height: 1.38;
+  }
+  
+  .bs-final-text-new p {
+    margin: 0 0 5px;
+  }
+  
+  .bs-final-text-new strong {
+    color: #d9496e;
+  
+    font-weight: 700;
+  }
+  
+  .bs-final-text-new .bs-final-last-line {
+    margin-bottom: 0;
+  
+    color: #58333f;
+  
+    font-weight: 600;
+  }
+  
+  
+  /* =========================================================
+     SIGNATURE
+     ========================================================= */
+  
+  .bs-final-signature-new {
+    margin-top: 7px;
+  
+    display: flex;
+    flex-direction: column;
+  
+    gap: 1px;
+  
+    color: #95606e;
+  
+    font-size: 8px;
+  
+    line-height: 1.3;
+  }
+  
+  .bs-final-signature-new strong {
+    color: #d9486e;
+  
+    font-family:
+      "Brush Script MT",
+      "Segoe Script",
+      cursive;
+  
+    font-size: 19px;
+  
+    font-weight: 600;
+  }
+  
+  
+  /* =========================================================
+     BUTTON
+     ========================================================= */
+  
+  .bs-final-button-wrap {
+    margin-top: 8px;
+  
+    width: 100%;
+  
+    display: flex;
+  
+    justify-content: center;
+  }
+  
+  .bs-final-button-wrap .bs-flow-btn {
+    width: min(310px, calc(100vw - 55px));
+  }
+  
+  
+  /* =========================================================
+     BOTTOM NOTE
+     ========================================================= */
+  
+  .bs-final-bottom-note {
+    display: flex;
+  
+    align-items: center;
+    justify-content: center;
+  
+    gap: 6px;
+  
+    margin-top: 6px;
+  
+    color: rgba(255, 231, 238, 0.85);
+  
+    font-size: 8px;
+  
+    text-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  
+  /* =========================================================
+     SHORT PHONES
+     ========================================================= */
+  
+  @media (max-height: 720px) {
+  
+    .bs-final-overlay-content {
+      padding-bottom: 8px;
+    }
+  
+    .bs-final-message-card {
+      padding:
+        11px
+        14px
+        10px;
+  
+      border-radius: 21px;
+    }
+  
+    .bs-final-heart {
+      width: 26px;
+      height: 26px;
+  
+      margin-bottom: 2px;
+    }
+  
+    .bs-final-title-new {
+      font-size: 27px;
+    }
+  
+    .bs-final-divider {
+      margin: 5px auto;
+    }
+  
+    .bs-final-text-new {
+      font-size: 8.5px;
+  
+      line-height: 1.32;
+    }
+  
+    .bs-final-text-new p {
+      margin-bottom: 3px;
+    }
+  
+    .bs-final-signature-new {
+      margin-top: 5px;
+    }
+  
+    .bs-final-button-wrap {
+      margin-top: 6px;
+    }
+  
+    .bs-final-bottom-note {
+      margin-top: 3px;
+    }
+  }
+  
+  
+  /* =========================================================
+     VERY SHORT PHONES
+     ========================================================= */
+  
+  @media (max-height: 650px) {
+  
+    .bs-final-message-card {
+      padding:
+        9px
+        12px
+        8px;
+    }
+  
+    .bs-final-title-new {
+      font-size: 24px;
+    }
+  
+    .bs-final-text-new {
+      font-size: 8px;
+    }
+  
+    .bs-final-signature-new strong {
+      font-size: 17px;
+    }
+  
+    .bs-final-button-wrap .bs-flow-btn {
+      height: 48px;
+    }
+  }
