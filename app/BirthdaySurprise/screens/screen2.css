@@ -1,10 +1,15 @@
+/* =========================================
+   SCREEN 2
+========================================= */
+
 .bs-screen2-follow {
   position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: #170d12;
+  background: #fff0f5;
 }
+
 
 /* =========================================
    IMAGE
@@ -18,7 +23,7 @@
   align-items: center;
   justify-content: center;
 
-  background: #170d12;
+  background: #fff0f5;
 }
 
 .bs-screen2-follow-image {
@@ -33,7 +38,7 @@
 
 
 /* =========================================
-   OVERLAY
+   SOFT PINK OVERLAY
 ========================================= */
 
 .bs-screen2-follow-overlay {
@@ -44,11 +49,11 @@
   background:
     linear-gradient(
       to bottom,
-      rgba(15, 5, 10, 0.72) 0%,
-      rgba(15, 5, 10, 0.25) 27%,
-      rgba(15, 5, 10, 0.03) 48%,
-      rgba(15, 5, 10, 0.15) 70%,
-      rgba(15, 5, 10, 0.78) 100%
+      rgba(255, 240, 245, 0.72) 0%,
+      rgba(255, 240, 245, 0.18) 18%,
+      rgba(255, 240, 245, 0) 42%,
+      rgba(255, 240, 245, 0.04) 72%,
+      rgba(255, 240, 245, 0.80) 100%
     );
 }
 
@@ -61,23 +66,24 @@
   position: relative;
   z-index: 5;
 
-  width: min(430px, calc(100% - 28px));
+  width: 100%;
   height: 100%;
 
-  margin: 0 auto;
+  margin: 0;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  /*
-    IMPORTANT:
-    Everything starts from the top now.
-  */
   justify-content: flex-start;
 
-  padding-top: 18px;
-  padding-bottom: 14px;
+  /*
+   * 10px higher than previous version.
+   */
+  padding-top: 0;
+  padding-bottom: 10px;
+
+  box-sizing: border-box;
 }
 
 
@@ -86,20 +92,29 @@
 ========================================= */
 
 .bs-screen2-follow-pill {
+  margin-top: 0;
   margin-bottom: 4px;
 
-  padding: 5px 10px;
+  padding: 5px 11px;
 
-  background: rgba(255, 255, 255, 0.16);
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.72);
 
-  color: #fff;
+  border: 1px solid rgba(220, 100, 130, 0.20);
+
+  color: #c65372;
 
   font-size: 8px;
-  letter-spacing: 1.1px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+
+  border-radius: 999px;
 
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+
+  box-shadow:
+    0 4px 14px rgba(190, 70, 100, 0.10);
 }
 
 
@@ -112,17 +127,19 @@
 
   text-align: center;
 
-  color: #fff;
+  color: #7d3049;
 
-  font-size: 24px;
-  line-height: 0.95;
+  font-size: 23px;
+
+  line-height: 0.98;
 
   text-shadow:
-    0 2px 10px rgba(0, 0, 0, 0.45);
+    0 2px 8px rgba(255, 255, 255, 0.95);
 }
 
 .bs-screen2-follow-heading em {
-  color: #ffd6df;
+  color: #d95776;
+  font-style: italic;
 }
 
 
@@ -139,14 +156,15 @@
 
   margin-top: 5px;
 
-  padding: 4px 9px;
+  padding: 4px 10px;
 
   border-radius: 999px;
 
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.72);
 
-  color: #fff;
+  border: 1px solid rgba(220, 100, 130, 0.18);
+
+  color: #9a405b;
 
   font-size: 8px;
   font-weight: 700;
@@ -155,6 +173,9 @@
 
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+
+  box-shadow:
+    0 3px 10px rgba(190, 70, 100, 0.07);
 }
 
 .bs-screen2-follow-date svg {
@@ -164,50 +185,76 @@
 
 
 /* =========================================
-   SMALL COUNTDOWN
+   COUNTDOWN
+   PERFECTLY CENTERED
 ========================================= */
 
 .bs-screen2-follow-countdown {
+  position: absolute;
+
+  /*
+   * Instead of left:50%,
+   * stretch across the entire screen.
+   */
+  left: 0;
+  right: 0;
+
+  bottom: 78px;
+
+  width: 250px;
+  max-width: calc(100% - 40px);
+
+  margin-left: auto;
+  margin-right: auto;
+
   display: grid;
 
   grid-template-columns: repeat(4, 1fr);
 
-  width: 100%;
-  max-width: 250px;
-
   gap: 4px;
 
-  margin-top: 6px;
+  box-sizing: border-box;
 }
 
 .bs-screen2-follow-countdown > div {
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
   justify-content: center;
 
-  min-height: 37px;
+  min-height: 36px;
+
+  padding: 3px 2px;
 
   border-radius: 9px;
 
-  background: rgba(20, 8, 13, 0.42);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.80);
 
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
+  border: 1px solid rgba(215, 80, 115, 0.18);
+
+  box-shadow:
+    0 4px 14px rgba(190, 70, 100, 0.10);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  box-sizing: border-box;
 }
 
 .bs-screen2-follow-countdown strong {
-  color: #fff;
+  color: #c94f70;
 
   font-size: 13px;
+
   line-height: 1;
 }
 
 .bs-screen2-follow-countdown span {
   margin-top: 3px;
 
-  color: rgba(255, 255, 255, 0.72);
+  color: #a35a6d;
 
   font-size: 6px;
 
@@ -219,34 +266,55 @@
 
 /* =========================================
    BUTTON
+   PERFECTLY CENTERED
 ========================================= */
 
 .bs-screen2-follow-button {
   position: absolute;
 
-  bottom: 16px;
+  left: 0;
+  right: 0;
 
-  transform: translateX(-50%);
+  bottom: 14px;
 
   width: 100%;
 
+  margin-left: auto;
+  margin-right: auto;
+
   display: flex;
+
+  align-items: center;
   justify-content: center;
+
+  box-sizing: border-box;
+}
+
+
+/*
+ * This also guarantees the actual button
+ * doesn't inherit an unexpected horizontal
+ * offset from the wrapper.
+ */
+.bs-screen2-follow-button > * {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
 /* =========================================
-   SMALL PHONES
+   SHORT PHONES
 ========================================= */
 
 @media (max-height: 700px) {
 
   .bs-screen2-follow-content {
-    padding-top: 12px;
+    padding-top: 0;
   }
 
   .bs-screen2-follow-pill {
-    padding: 4px 8px;
+    padding: 4px 9px;
+    font-size: 7px;
   }
 
   .bs-screen2-follow-heading {
@@ -255,19 +323,74 @@
 
   .bs-screen2-follow-date {
     margin-top: 3px;
+    padding: 3px 8px;
+    font-size: 7px;
   }
 
   .bs-screen2-follow-countdown {
-    margin-top: 4px;
-    position: relative;
-    top: 68%;
+    bottom: 67px;
+    width: 230px;
   }
 
   .bs-screen2-follow-countdown > div {
-    min-height: 33px;
+    min-height: 32px;
+  }
+
+  .bs-screen2-follow-countdown strong {
+    font-size: 11px;
+  }
+
+  .bs-screen2-follow-countdown span {
+    font-size: 5.5px;
+    margin-top: 2px;
   }
 
   .bs-screen2-follow-button {
-    bottom: 10px;
+    bottom: 9px;
+  }
+}
+
+
+/* =========================================
+   VERY SHORT PHONES
+========================================= */
+
+@media (max-height: 620px) {
+
+  .bs-screen2-follow-pill {
+    padding: 3px 8px;
+    font-size: 6.5px;
+  }
+
+  .bs-screen2-follow-heading {
+    font-size: 19px;
+  }
+
+  .bs-screen2-follow-date {
+    margin-top: 2px;
+    padding: 3px 7px;
+    font-size: 6.5px;
+  }
+
+  .bs-screen2-follow-countdown {
+    bottom: 61px;
+    width: 215px;
+  }
+
+  .bs-screen2-follow-countdown > div {
+    min-height: 29px;
+    border-radius: 7px;
+  }
+
+  .bs-screen2-follow-countdown strong {
+    font-size: 10px;
+  }
+
+  .bs-screen2-follow-countdown span {
+    font-size: 5px;
+  }
+
+  .bs-screen2-follow-button {
+    bottom: 7px;
   }
 }
