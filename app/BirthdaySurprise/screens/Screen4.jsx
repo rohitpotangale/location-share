@@ -56,7 +56,7 @@ export default function Screen4({ next, storyPhoto }) {
             transition={{ duration: 0.45 }}
           >
             <Heart size={11} fill="currentColor" />
-            <span>A LITTLE MESSAGE</span>
+            <span>A NOTE, JUST FOR YOU</span>
             <Heart size={11} fill="currentColor" />
           </motion.div>
 
@@ -68,9 +68,9 @@ export default function Screen4({ next, storyPhoto }) {
             transition={{ delay: 0.1 }}
           >
             <h2>
-              What you mean
+              Some people stay
               <br />
-              <em>to me. 💗</em>
+              <em>in your story. 💗</em>
             </h2>
           </motion.div>
 
@@ -121,9 +121,9 @@ export default function Screen4({ next, storyPhoto }) {
             transition={{ delay: 0.48 }}
           >
             <p>
-              Some people become part of your story
+              Some connections start quietly
               <br />
-              without even realizing it.
+              and become part of the moments we remember.
             </p>
 
             <div className="bs-screen4-message-divider">
@@ -133,9 +133,9 @@ export default function Screen4({ next, storyPhoto }) {
             </div>
 
             <p>
-              I'm genuinely glad our friendship
+              I’m genuinely happy ours became one of
               <br />
-              became one of those stories. <strong>💗</strong>
+              those unexpectedly special stories. <strong>💗</strong>
             </p>
           </motion.div>
 
@@ -150,7 +150,7 @@ export default function Screen4({ next, storyPhoto }) {
               onClick={next}
               icon={Camera}
             >
-              Now let's look at a memory
+              Open a memory
             </FlowButton>
           </motion.div>
 
@@ -162,7 +162,7 @@ export default function Screen4({ next, storyPhoto }) {
             transition={{ delay: 0.9 }}
           >
             <span>♡</span>
-            <span>Something special is waiting</span>
+            <span>Next: one moment worth keeping</span>
             <span>♡</span>
           </motion.div>
 

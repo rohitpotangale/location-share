@@ -96,7 +96,7 @@ export default function Screen1({ next, herName = "Mahii" }) {
             transition={{ duration: 0.5 }}
           >
             <Heart size={12} fill="currentColor" />
-            <span>A LITTLE SURPRISE FOR YOU</span>
+            <span>A PRIVATE BIRTHDAY EDIT</span>
             <Heart size={12} fill="currentColor" />
           </motion.div>
 
@@ -209,11 +209,11 @@ export default function Screen1({ next, herName = "Mahii" }) {
             transition={{ delay: 0.9, duration: 0.5 }}
           >
             <p>
-              I could have sent you a
+              A normal birthday text felt
               <br />
-              normal <strong>birthday message...</strong>
+              a little too <strong>ordinary.</strong>
               <br />
-              but where is the fun in that? 😊
+              So I made this instead. ✨
             </p>
 
             <div className="message-dot-line">
@@ -223,9 +223,9 @@ export default function Screen1({ next, herName = "Mahii" }) {
             </div>
 
             <p>
-              So I made you a <strong>tiny adventure</strong> —
+              Think of this as a <strong>mini experience</strong> —
               <br />
-              one <strong>surprise</strong> at a time. ✨
+              nine little moments, made <strong>for you.</strong> 💫
             </p>
           </motion.div>
 
@@ -248,7 +248,7 @@ export default function Screen1({ next, herName = "Mahii" }) {
               <Gift size={23} />
             </span>
 
-            <span>Start my surprise</span>
+            <span>Enter the experience</span>
 
             <ArrowRight size={23} />
           </motion.button>
@@ -261,7 +261,7 @@ export default function Screen1({ next, herName = "Mahii" }) {
             transition={{ delay: 1.3 }}
           >
             <Heart size={10} fill="currentColor" />
-            <span>P.S. Don't skip anything</span>
+            <span>P.S. The details are part of the surprise</span>
             <Heart size={10} fill="currentColor" />
           </motion.div>
 

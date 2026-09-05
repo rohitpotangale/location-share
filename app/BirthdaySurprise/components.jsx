@@ -44,6 +44,7 @@ export function FlowButton({ children, onClick, icon: Icon, showArrow = true, di
       whileHover={{ y: -2 }}
       whileTap={{ scale: 0.97 }}
       className="bs-flow-btn"
+      aria-label={typeof children === "string" ? children : "Continue"}
     >
       <span className="bs-flow-shine" />
       <span className="bs-flow-content">
@@ -155,7 +156,7 @@ export function PhysicsCelebration() {
       Bodies.rectangle(
         Math.random() * width, -20 - Math.random() * height, 6 + Math.random() * 8, 7 + Math.random() * 12,
         { restitution: 0.55, friction: 0.01, angle: Math.random() * 6.28,
-          render: { fillStyle: ["#d95776", "#e9b45f", "#b88ac4", "#f08fa8", "#f5cf88"][i % 5] } }
+          render: { fillStyle: ["#e05b82", "#f1b866", "#ae8fca", "#f08fa8", "#f3d09a"][i % 5] } }
       )
     );
     Composite.add(engine.world, [floor, ...pieces]);

@@ -47,7 +47,7 @@ export default function Screen2({ next, time }) {
             transition={{ duration: 0.5 }}
           >
             <Sparkles size={11} />
-            <span>YOUR SPECIAL DAY</span>
+            <span>THE COUNTDOWN IS ON</span>
             <Sparkles size={11} />
           </motion.div>
 
@@ -58,9 +58,9 @@ export default function Screen2({ next, time }) {
             transition={{ delay: 0.1 }}
           >
             <h2 className="bs-heading bs-screen2-follow-heading">
-              It's almost
+              The moment is getting closer
               <br />
-              <em>here! 💕</em>
+              <em>and this is only chapter two. ✨</em>
             </h2>
           </motion.div>
 
@@ -100,7 +100,7 @@ export default function Screen2({ next, time }) {
             transition={{ delay: 0.45 }}
           >
             <FlowButton onClick={next} icon={Gift}>
-              Keep the surprises coming
+              Continue the story
             </FlowButton>
           </motion.div>
 

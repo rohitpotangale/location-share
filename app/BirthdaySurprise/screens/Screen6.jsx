@@ -259,7 +259,7 @@ export default function Screen6({ next }) {
           >
             <Sparkles size={11} />
 
-            <span>A SECRET GIFT</span>
+            <span>CHAPTER 03 • LIVE CLUE</span>
 
             <Sparkles size={11} />
           </motion.div>
@@ -351,7 +351,7 @@ export default function Screen6({ next }) {
             <MapPin size={17} />
 
             <div>
-              <strong>A tiny clue is needed</strong>
+              <strong>A live clue is needed</strong>
             </div>
           </motion.div>
 
@@ -424,10 +424,10 @@ export default function Screen6({ next }) {
               disabled={loading}
             >
               {loading
-                ? "Getting your location..."
+                ? "Finding your live clue..."
                 : statusType === "error"
                 ? "Try Again"
-                : "Give me the clue"}
+                : "Reveal the clue"}
             </FlowButton>
           </motion.div>
 
