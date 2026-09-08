@@ -1,73 +1,664 @@
-.screen1{
-  position:relative;width:100%;height:100dvh;min-height:100dvh;overflow:hidden;isolation:isolate;
+.screen1 {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  min-height: 100dvh;
+  overflow: hidden;
+  isolation: isolate;
+
   background:
-    radial-gradient(circle at 50% 18%,rgba(255,255,255,.98) 0 14%,transparent 38%),
-    radial-gradient(circle at 15% 85%,rgba(247,124,164,.18),transparent 32%),
-    linear-gradient(155deg,#fffafd,#f7eaf2 58%,#edd5e1);
+    radial-gradient(
+      circle at 50% 18%,
+      rgba(255, 255, 255, 0.98) 0 14%,
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 15% 85%,
+      rgba(247, 124, 164, 0.18),
+      transparent 32%
+    ),
+    linear-gradient(
+      155deg,
+      #fffafd,
+      #f7eaf2 58%,
+      #edd5e1
+    );
 }
-.screen1::after{
-  content:"";position:absolute;inset:0;pointer-events:none;opacity:.24;
-  background:repeating-linear-gradient(90deg,rgba(75,18,48,.018) 0 1px,transparent 1px 7px);
+
+.screen1::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.24;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(75, 18, 48, 0.018) 0 1px,
+      transparent 1px 7px
+    );
 }
-.screen1-content{
-  position:relative;z-index:7;width:min(430px,calc(100% - 32px));height:100%;margin:0 auto;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
-  padding:38px 0 12px;
+
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.screen1-content {
+  position: relative;
+  z-index: 7;
+
+  width: min(430px, calc(100% - 32px));
+  height: 100%;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 20px 0 30px;
 }
-.screen1-badge{
-  display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:999px;
-  background:rgba(255,255,255,.58);border:1px solid rgba(165,70,108,.13);
-  color:#aa3f64;font-size:8px;font-weight:800;letter-spacing:.18em;
-  box-shadow:0 12px 30px rgba(105,38,71,.08),inset 0 1px white;backdrop-filter:blur(16px);
+
+
+/* =========================
+   PHOTO
+========================= */
+
+.screen1-photo-wrap {
+  position: relative;
+  margin: 0 0 17px;
 }
-.screen1-photo-wrap{position:relative;margin:15px 0 12px;}
-.screen1-photo-halo{
-  position:absolute;inset:-20px;border-radius:42px;
-  background:radial-gradient(circle,rgba(238,98,140,.22),transparent 66%);filter:blur(15px);z-index:-1;
+
+.screen1-photo-halo {
+  position: absolute;
+  inset: -22px;
+
+  border-radius: 42px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(238, 98, 140, 0.25),
+      transparent 66%
+    );
+
+  filter: blur(15px);
+  z-index: -1;
 }
-.screen1-photo-ring{
-  width:min(188px,47vw);aspect-ratio:4/5;padding:6px;border-radius:30px;
-  background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(245,128,164,.72));
-  box-shadow:0 25px 55px rgba(102,33,66,.18),0 0 30px rgba(255,149,176,.28);
+
+.screen1-photo-ring {
+  width: min(205px, 52vw);
+  aspect-ratio: 4 / 5;
+
+  padding: 6px;
+
+  border-radius: 30px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.98),
+      rgba(245, 128, 164, 0.78)
+    );
+
+  box-shadow:
+    0 25px 55px rgba(102, 33, 66, 0.18),
+    0 0 30px rgba(255, 149, 176, 0.28);
 }
-.screen1-photo-ring img{width:100%;height:100%;object-fit:cover;object-position:center;border-radius:25px;display:block;}
-.photo-heart{position:absolute;color:#df567d;font-size:18px;text-shadow:0 7px 20px rgba(223,86,125,.22);}
-.photo-heart-1{left:-18px;top:28px}.photo-heart-2{right:-17px;bottom:23px;font-size:15px}
-.screen1-hey{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#957280;margin-bottom:2px}
-.screen1-name-row{display:flex;align-items:center;justify-content:center;gap:9px}
-.screen1-name-row h1{
-  margin:0;font-family:"Playfair Display",Georgia,serif;font-size:clamp(38px,10.5vw,56px);line-height:.93;
-  letter-spacing:-.045em;color:#2e1726;font-weight:600;
+
+.screen1-photo-ring img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+
+  border-radius: 25px;
 }
-.name-heart{font-size:18px;transform:translateY(2px)}.name-sparkle{color:#d89b4e}.name-sparkle.right{transform:translateY(-2px)}
-.screen1-divider{display:flex;align-items:center;gap:10px;margin:13px 0 10px;color:#d85b7f}
-.screen1-divider span{width:55px;height:1px;background:linear-gradient(90deg,transparent,#d85b7f,transparent)}
-.screen1-message{
-  width:min(350px,100%);padding:13px 16px;border-radius:22px;background:rgba(255,255,255,.48);
-  border:1px solid rgba(172,72,111,.09);backdrop-filter:blur(15px);box-shadow:0 16px 34px rgba(90,34,61,.07)
+
+
+/* Hearts around photo */
+
+.photo-heart {
+  position: absolute;
+
+  color: #df567d;
+  font-size: 18px;
+
+  text-shadow:
+    0 7px 20px rgba(223, 86, 125, 0.22);
 }
-.screen1-message p{margin:0;color:#725c69;font-size:11px;line-height:1.52}
-.screen1-message strong{color:#bd4d70}
-.message-dot-line{display:flex;justify-content:center;align-items:center;gap:6px;margin:9px 0;color:#d45c7e}
-.message-dot-line span{width:28px;height:1px;background:linear-gradient(90deg,transparent,#dfa2b6,transparent)}
-.screen1-button{
-  margin-top:13px;width:min(345px,100%);display:flex;align-items:center;gap:11px;
-  border:1px solid rgba(255,255,255,.2);border-radius:17px;padding:12px 14px;
-  color:white;cursor:pointer;background:linear-gradient(135deg,#2e1324,#5d2541 52%,#df547e);
-  box-shadow:0 18px 36px rgba(82,29,57,.20),inset 0 1px rgba(255,255,255,.25)
+
+.photo-heart-1 {
+  left: -18px;
+  top: 28px;
 }
-.screen1-button>span:nth-child(2){flex:1;text-align:center;font-size:11px;font-weight:800;letter-spacing:.01em}
-.button-gift{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18)}
-.screen1-note{display:flex;align-items:center;gap:7px;margin-top:9px;color:#987482;font-size:8px;letter-spacing:.08em}
-.screen1-glow{position:absolute;border-radius:50%;filter:blur(55px);pointer-events:none;z-index:0}
-.screen1-glow-left{width:300px;height:300px;left:-160px;top:18%;background:rgba(248,101,146,.19)}
-.screen1-glow-right{width:280px;height:280px;right:-150px;top:37%;background:rgba(214,153,255,.14)}
-.screen1-glow-center{width:380px;height:320px;left:50%;top:14%;transform:translateX(-50%);background:rgba(255,255,255,.42);filter:blur(70px)}
-.screen1-floating,.screen1-sparkle{pointer-events:none}.screen1-floating{position:absolute;inset:0;z-index:1;overflow:hidden}
-.float-heart{position:absolute;color:rgba(198,65,109,.17);text-shadow:0 5px 18px rgba(198,65,109,.1);animation:screen1Heart 5s ease-in-out infinite}
-.fh1{left:7%;top:22%;font-size:14px}.fh2{right:7%;top:25%;font-size:28px;animation-delay:1s}.fh3{left:4%;top:53%;font-size:21px;animation-delay:1.8s}.fh4{right:5%;top:57%;font-size:16px;animation-delay:.7s}.fh5{left:14%;bottom:18%;font-size:14px;animation-delay:2s}.fh6{right:14%;bottom:20%;font-size:24px;animation-delay:2.5s}
-@keyframes screen1Heart{0%,100%{transform:translateY(0) rotate(-5deg);opacity:.3}50%{transform:translateY(-11px) rotate(5deg);opacity:.9}}
-.screen1-sparkle{position:absolute;z-index:3;color:#d4a058;text-shadow:0 0 18px rgba(212,160,88,.28)}.sp1{left:14%;top:18%}.sp2{right:15%;top:17%}.sp3{right:10%;bottom:32%}
-.screen1-flowers{position:absolute;bottom:-10px;display:flex;align-items:flex-end;gap:-2px;z-index:2;opacity:.84}.screen1-flowers-left{left:-10px}.screen1-flowers-right{right:-10px;transform:scaleX(-1)}
-.css-flower{position:relative;display:inline-block;border-radius:50%;width:56px;height:72px}.css-flower-medium{transform:scale(.82)}.css-flower-small{transform:scale(.62)}.css-flower i{position:absolute;width:27px;height:35px;border-radius:60% 60% 44% 44%;background:linear-gradient(145deg,#ffb7cb,#e96a91);left:14px;top:7px;transform-origin:50% 78%}.css-flower i:nth-child(1){transform:rotate(0)}.css-flower i:nth-child(2){transform:rotate(72deg)}.css-flower i:nth-child(3){transform:rotate(144deg)}.css-flower i:nth-child(4){transform:rotate(216deg)}.css-flower i:nth-child(5){transform:rotate(288deg)}.css-flower b{position:absolute;width:13px;height:13px;border-radius:50%;background:#f5bd5c;left:21px;top:27px;box-shadow:0 0 12px rgba(245,189,92,.3)}.css-flower::after{content:"";position:absolute;width:3px;height:35px;background:#679a78;left:27px;top:40px;border-radius:999px}
-@media(max-height:740px){.screen1-photo-ring{width:150px}.screen1-photo-wrap{margin:9px 0}.screen1-divider{margin:8px 0}.screen1-message{padding:10px 13px}.screen1-button{margin-top:8px}}
+
+.photo-heart-2 {
+  right: -17px;
+  bottom: 23px;
+  font-size: 15px;
+}
+
+
+/* =========================
+   NAME
+========================= */
+
+.screen1-name-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.screen1-name-decoration {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-bottom: 5px;
+
+  color: #d89b4e;
+}
+
+.screen1-name-decoration span {
+  font-size: 15px;
+}
+
+.screen1-name-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.screen1-name-row h1 {
+  margin: 0;
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: clamp(40px, 11vw, 58px);
+  line-height: 0.95;
+
+  letter-spacing: -0.045em;
+
+  color: #2e1726;
+  font-weight: 600;
+}
+
+.name-heart {
+  font-size: 19px;
+  transform: translateY(3px);
+}
+
+
+/* =========================
+   DIVIDER
+========================= */
+
+.screen1-divider {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin: 13px 0 12px;
+
+  color: #d85b7f;
+}
+
+.screen1-divider span {
+  width: 55px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #d85b7f,
+      transparent
+    );
+}
+
+
+/* =========================
+   BIRTHDAY MESSAGE
+========================= */
+
+.screen1-birthday-message {
+  width: min(350px, 100%);
+
+  padding: 16px 18px 15px;
+
+  border-radius: 22px;
+
+  background: rgba(255, 255, 255, 0.48);
+
+  border: 1px solid rgba(172, 72, 111, 0.09);
+
+  backdrop-filter: blur(15px);
+
+  box-shadow:
+    0 16px 34px rgba(90, 34, 61, 0.07);
+}
+
+.screen1-birthday-message h2 {
+  margin: 0 0 9px;
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  color: #a83f62;
+
+  font-size: 17px;
+  line-height: 1.25;
+
+  font-weight: 600;
+}
+
+.screen1-birthday-message p {
+  margin: 0;
+
+  color: #725c69;
+
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.screen1-birthday-message p + p {
+  margin-top: 7px;
+}
+
+.screen1-signature {
+  margin-top: 10px;
+
+  color: #bd4d70;
+
+  font-family:
+    "Playfair Display",
+    Georgia,
+    serif;
+
+  font-size: 13px;
+  font-style: italic;
+}
+
+
+/* =========================
+   BACKGROUND GLOWS
+========================= */
+
+.screen1-glow {
+  position: absolute;
+
+  border-radius: 50%;
+
+  filter: blur(55px);
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+.screen1-glow-left {
+  width: 300px;
+  height: 300px;
+
+  left: -160px;
+  top: 18%;
+
+  background: rgba(248, 101, 146, 0.19);
+}
+
+.screen1-glow-right {
+  width: 280px;
+  height: 280px;
+
+  right: -150px;
+  top: 37%;
+
+  background: rgba(214, 153, 255, 0.14);
+}
+
+.screen1-glow-center {
+  width: 380px;
+  height: 320px;
+
+  left: 50%;
+  top: 14%;
+
+  transform: translateX(-50%);
+
+  background: rgba(255, 255, 255, 0.42);
+
+  filter: blur(70px);
+}
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+.screen1-floating,
+.screen1-sparkle {
+  pointer-events: none;
+}
+
+.screen1-floating {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  overflow: hidden;
+}
+
+.float-heart {
+  position: absolute;
+
+  color: rgba(198, 65, 109, 0.17);
+
+  text-shadow:
+    0 5px 18px rgba(198, 65, 109, 0.1);
+
+  animation:
+    screen1Heart 5s ease-in-out infinite;
+}
+
+.fh1 {
+  left: 7%;
+  top: 22%;
+  font-size: 14px;
+}
+
+.fh2 {
+  right: 7%;
+  top: 25%;
+  font-size: 28px;
+  animation-delay: 1s;
+}
+
+.fh3 {
+  left: 4%;
+  top: 53%;
+  font-size: 21px;
+  animation-delay: 1.8s;
+}
+
+.fh4 {
+  right: 5%;
+  top: 57%;
+  font-size: 16px;
+  animation-delay: 0.7s;
+}
+
+.fh5 {
+  left: 14%;
+  bottom: 18%;
+  font-size: 14px;
+  animation-delay: 2s;
+}
+
+.fh6 {
+  right: 14%;
+  bottom: 20%;
+  font-size: 24px;
+  animation-delay: 2.5s;
+}
+
+@keyframes screen1Heart {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-5deg);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: translateY(-11px) rotate(5deg);
+    opacity: 0.9;
+  }
+}
+
+
+/* =========================
+   SPARKLES
+========================= */
+
+.screen1-sparkle {
+  position: absolute;
+
+  z-index: 3;
+
+  color: #d4a058;
+
+  text-shadow:
+    0 0 18px rgba(212, 160, 88, 0.28);
+}
+
+.sp1 {
+  left: 14%;
+  top: 18%;
+}
+
+.sp2 {
+  right: 15%;
+  top: 17%;
+}
+
+.sp3 {
+  right: 10%;
+  bottom: 32%;
+}
+
+
+/* =========================
+   FLOWERS
+========================= */
+
+.screen1-flowers {
+  position: absolute;
+
+  bottom: -10px;
+
+  display: flex;
+  align-items: flex-end;
+  gap: -2px;
+
+  z-index: 2;
+
+  opacity: 0.84;
+}
+
+.screen1-flowers-left {
+  left: -10px;
+}
+
+.screen1-flowers-right {
+  right: -10px;
+  transform: scaleX(-1);
+}
+
+.css-flower {
+  position: relative;
+
+  display: inline-block;
+
+  border-radius: 50%;
+
+  width: 56px;
+  height: 72px;
+}
+
+.css-flower-medium {
+  transform: scale(0.82);
+}
+
+.css-flower-small {
+  transform: scale(0.62);
+}
+
+.css-flower i {
+  position: absolute;
+
+  width: 27px;
+  height: 35px;
+
+  border-radius: 60% 60% 44% 44%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffb7cb,
+      #e96a91
+    );
+
+  left: 14px;
+  top: 7px;
+
+  transform-origin: 50% 78%;
+}
+
+.css-flower i:nth-child(1) {
+  transform: rotate(0);
+}
+
+.css-flower i:nth-child(2) {
+  transform: rotate(72deg);
+}
+
+.css-flower i:nth-child(3) {
+  transform: rotate(144deg);
+}
+
+.css-flower i:nth-child(4) {
+  transform: rotate(216deg);
+}
+
+.css-flower i:nth-child(5) {
+  transform: rotate(288deg);
+}
+
+.css-flower b {
+  position: absolute;
+
+  width: 13px;
+  height: 13px;
+
+  border-radius: 50%;
+
+  background: #f5bd5c;
+
+  left: 21px;
+  top: 27px;
+
+  box-shadow:
+    0 0 12px rgba(245, 189, 92, 0.3);
+}
+
+.css-flower::after {
+  content: "";
+
+  position: absolute;
+
+  width: 3px;
+  height: 35px;
+
+  background: #679a78;
+
+  left: 27px;
+  top: 40px;
+
+  border-radius: 999px;
+}
+
+
+/* =========================
+   SMALL SCREENS
+========================= */
+
+@media (max-height: 740px) {
+  .screen1-content {
+    padding-top: 10px;
+    padding-bottom: 18px;
+  }
+
+  .screen1-photo-ring {
+    width: 165px;
+  }
+
+  .screen1-photo-wrap {
+    margin-bottom: 12px;
+  }
+
+  .screen1-divider {
+    margin: 9px 0;
+  }
+
+  .screen1-birthday-message {
+    padding: 12px 14px;
+  }
+
+  .screen1-birthday-message h2 {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+
+  .screen1-birthday-message p {
+    font-size: 10px;
+  }
+
+  .screen1-signature {
+    margin-top: 7px;
+    font-size: 12px;
+  }
+}
+
+
+/* =========================
+   VERY SMALL PHONES
+========================= */
+
+@media (max-width: 360px) {
+  .screen1-content {
+    width: calc(100% - 24px);
+  }
+
+  .screen1-photo-ring {
+    width: 150px;
+  }
+
+  .screen1-name-row h1 {
+    font-size: 38px;
+  }
+
+  .screen1-birthday-message {
+    width: min(320px, 100%);
+  }
+
+  .screen1-birthday-message h2 {
+    font-size: 14px;
+  }
+
+  .screen1-birthday-message p {
+    font-size: 9.5px;
+  }
+
+  .screen1-flowers {
+    transform: scale(0.82);
+  }
+
+  .screen1-flowers-right {
+    transform: scaleX(-1) scale(0.82);
+  }
+}

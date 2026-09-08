@@ -66,13 +66,13 @@ export default function Home() {
 
   // Before location is checked, show the location gate.
   // This means BirthdaySurprise is NOT rendered initially.
-  if (!locationChecked || isRestricted) {
-    return (
-      <LocationShare
-        onLocationChecked={handleLocationChecked}
-      />
-    );
-  }
+  // if (!locationChecked || isRestricted) {
+  //   return (
+  //     <LocationShare
+  //       onLocationChecked={handleLocationChecked}
+  //     />
+  //   );
+  // }
 
   // User is more than 5km away from BOTH restricted locations.
   return (

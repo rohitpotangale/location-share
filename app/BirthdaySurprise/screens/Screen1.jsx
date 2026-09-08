@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { Gift, Sparkles, Heart, ArrowRight } from "lucide-react";
+import { Heart, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Screen } from "../components";
-import "./screen1.css"
+import "./screen1.css";
 
-export default function Screen1({ next, herName = "Mahii" }) {
+export default function Screen1({ herName = "Mahii" }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       confetti({
@@ -27,7 +27,7 @@ export default function Screen1({ next, herName = "Mahii" }) {
     <Screen step={1}>
       <main className="screen1">
 
-        {/* Background glows */}
+        {/* Soft background glows */}
         <div className="screen1-glow screen1-glow-left" />
         <div className="screen1-glow screen1-glow-right" />
         <div className="screen1-glow screen1-glow-center" />
@@ -50,7 +50,10 @@ export default function Screen1({ next, herName = "Mahii" }) {
             opacity: [0.35, 1, 0.35],
             rotate: [0, 15, 0],
           }}
-          transition={{ duration: 2.6, repeat: Infinity }}
+          transition={{
+            duration: 2.6,
+            repeat: Infinity,
+          }}
         >
           ✦
         </motion.span>
@@ -88,18 +91,6 @@ export default function Screen1({ next, herName = "Mahii" }) {
         {/* Main content */}
         <div className="screen1-content">
 
-          {/* Top badge */}
-          <motion.div
-            className="screen1-badge"
-            initial={{ opacity: 0, y: -15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Heart size={12} fill="currentColor" />
-            <span>A PRIVATE BIRTHDAY EDIT</span>
-            <Heart size={12} fill="currentColor" />
-          </motion.div>
-
           {/* Portrait */}
           <motion.div
             className="screen1-photo-wrap"
@@ -114,7 +105,6 @@ export default function Screen1({ next, herName = "Mahii" }) {
               y: 0,
             }}
             transition={{
-              delay: 0.15,
               duration: 0.75,
               type: "spring",
               stiffness: 100,
@@ -138,25 +128,33 @@ export default function Screen1({ next, herName = "Mahii" }) {
                 ease: "easeInOut",
               }}
             >
-              {/* REPLACE THIS IMAGE LATER */}
               <img
                 src="/assets/mahi-screen1.jpeg"
                 alt={`${herName} birthday portrait`}
               />
             </motion.div>
 
-            {/* Small hearts around portrait */}
+            {/* Hearts around photo */}
             <motion.span
               className="photo-heart photo-heart-1"
-              animate={{ y: [0, -8, 0], scale: [1, 1.08, 1] }}
-              transition={{ duration: 2.5, repeat: Infinity }}
+              animate={{
+                y: [0, -8, 0],
+                scale: [1, 1.08, 1],
+              }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+              }}
             >
               ♥
             </motion.span>
 
             <motion.span
               className="photo-heart photo-heart-2"
-              animate={{ y: [0, 7, 0], scale: [1, 1.12, 1] }}
+              animate={{
+                y: [0, 7, 0],
+                scale: [1, 1.12, 1],
+              }}
               transition={{
                 duration: 2.8,
                 repeat: Infinity,
@@ -167,102 +165,88 @@ export default function Screen1({ next, herName = "Mahii" }) {
             </motion.span>
           </motion.div>
 
-          {/* Greeting */}
+          {/* Name */}
           <motion.div
-            className="screen1-greeting"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.65, duration: 0.55 }}
+            className="screen1-name-section"
+            initial={{
+              opacity: 0,
+              y: 12,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              delay: 0.45,
+              duration: 0.6,
+            }}
           >
-            <div className="screen1-hey">
-              Hey,
+            <div className="screen1-name-decoration">
+              <Sparkles size={17} />
+              <span>♡</span>
+              <Sparkles size={17} />
             </div>
 
             <div className="screen1-name-row">
-              <Sparkles className="name-sparkle left" size={19} />
-
               <h1>{herName}</h1>
-
               <span className="name-heart">❤️</span>
-
-              <Sparkles className="name-sparkle right" size={17} />
             </div>
           </motion.div>
 
-          {/* Decorative divider */}
+          {/* Divider */}
           <motion.div
             className="screen1-divider"
-            initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ delay: 0.8 }}
+            initial={{
+              opacity: 0,
+              scaleX: 0,
+            }}
+            animate={{
+              opacity: 1,
+              scaleX: 1,
+            }}
+            transition={{
+              delay: 0.65,
+              duration: 0.5,
+            }}
           >
             <span />
-            <Heart size={17} fill="currentColor" />
+            <Heart size={14} fill="currentColor" />
             <span />
           </motion.div>
 
-          {/* Message */}
+          {/* Birthday message */}
           <motion.div
-            className="screen1-message"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.5 }}
+            className="screen1-birthday-message"
+            initial={{
+              opacity: 0,
+              y: 12,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              delay: 0.8,
+              duration: 0.6,
+            }}
           >
+            <h2>
+              Happy Birthday, {herName}! 🎂💗
+            </h2>
+
             <p>
-              A normal birthday text felt
+              May your day be filled with happiness,
               <br />
-              a little too <strong>ordinary.</strong>
-              <br />
-              So I made this instead. ✨
+              smiles, and beautiful moments. ✨
             </p>
 
-            <div className="message-dot-line">
-              <span />
-              <Heart size={10} fill="currentColor" />
-              <span />
+            <p>
+              Keep smiling and stay amazing always! 🌸
+            </p>
+
+            <div className="screen1-signature">
+              — Jiju 💗
             </div>
-
-            <p>
-              Think of this as a <strong>mini experience</strong> —
-              <br />
-              nine little moments, made <strong>for you.</strong> 💫
-            </p>
-          </motion.div>
-
-          {/* Button */}
-          <motion.button
-            className="screen1-button"
-            onClick={next}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.05, duration: 0.5 }}
-            whileHover={{
-              scale: 1.025,
-              y: -2,
-            }}
-            whileTap={{
-              scale: 0.96,
-            }}
-          >
-            <span className="button-gift">
-              <Gift size={23} />
-            </span>
-
-            <span>Enter the experience</span>
-
-            <ArrowRight size={23} />
-          </motion.button>
-
-          {/* Bottom note */}
-          <motion.div
-            className="screen1-note"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.3 }}
-          >
-            <Heart size={10} fill="currentColor" />
-            <span>P.S. The details are part of the surprise</span>
-            <Heart size={10} fill="currentColor" />
           </motion.div>
 
         </div>
@@ -290,6 +274,7 @@ export default function Screen1({ next, herName = "Mahii" }) {
 function Flower({ type = "medium" }) {
   return (
     <span className={`css-flower css-flower-${type}`}>
+      <i />
       <i />
       <i />
       <i />
